@@ -79,7 +79,7 @@ Ir provides a toolbar with 2 (two) buttons in it: one for elevation curves, and 
 
 If you have questions or suggestions, feel free to contact me.
 
-> 1º Centro de Geoinformação (1º CGEO)
+> **1º Centro de Geoinformação (1º CGEO)**
 > - Rua Cleveland, 250 - Santa Teresa
 > - CEP 90.850-240
 > - Porto Alegre, Rio Grande do Sul, Brazil
