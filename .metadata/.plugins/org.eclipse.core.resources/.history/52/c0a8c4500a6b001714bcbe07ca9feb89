@@ -1,0 +1,88 @@
+package br.mil.eb.dsg.arctools;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import com.esri.arcgis.addins.desktop.Button;
+import com.esri.arcgis.arcmapui.IMxDocument;
+import com.esri.arcgis.carto.IEnumLayer;
+import com.esri.arcgis.carto.IFeatureLayer;
+import com.esri.arcgis.carto.ILayer;
+import com.esri.arcgis.framework.IApplication;
+import com.esri.arcgis.geodatabase.IFeature;
+import com.esri.arcgis.geodatabase.IFeatureClass;
+import com.esri.arcgis.geodatabase.IFeatureCursor;
+import com.esri.arcgis.geodatabase.IFields;
+import com.esri.arcgis.geometry.IGeometry;
+import com.esri.arcgis.geometry.IPolyline;
+import com.esri.arcgis.interop.AutomationException;
+
+public class CotaCurvas extends Button {
+	
+	static IApplication app;
+	IMxDocument mxDoc;
+	
+	@Override
+	public void init(IApplication app) throws IOException, AutomationException{
+		try{
+			CotaCurvas.app = app;
+			mxDoc = (IMxDocument) app.getDocument();
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Called when the button is clicked.
+	 * 
+	 * @exception java.io.IOException if there are interop problems.
+	 * @exception com.esri.arcgis.interop.AutomationException if the component throws an ArcObjects exception.
+	 */
+	@Override
+	public void onClick(){
+		try{
+			IEnumLayer allLayers = mxDoc.getFocusMap().getLayers(null, true);
+			int totalCurvas = 0;
+			
+			ILayer layer;
+			List<ILayer> curvasLayers = new ArrayList<ILayer>(); 
+			while((layer = allLayers.next()) != null)
+			{
+				if(layer.getName().toLowerCase().equals("rel_curva_nivel_l"))
+				{
+					curvasLayers.add(layer);
+				}
+			}
+			if(curvasLayers.size() == 0)
+			{
+				JOptionPane.showMessageDialog(null, "Não há camadas REL_Curva_Nivel_L disponíveis para serem cotadas!");
+				return;
+			}
+			allLayers.reset();
+			
+			for(ILayer curvaLayer : curvasLayers)
+			{
+				IFeatureLayer featLayer = (IFeatureLayer) curvaLayer;
+				IFeatureClass featClass = featLayer.getFeatureClass();
+				IFeatureCursor featCursor = featClass.search(null, false);
+				IFields atributos = featClass.getFields();
+				int atribCota = atributos.findField("cota");
+				IFeature feat;
+				while((feat = featCursor.nextFeature()) != null)
+				{
+					double cotaZ = feat.getShape().getEnvelope().getZMax();
+					feat.setValue(atribCota, cotaZ);
+					feat.store();
+					totalCurvas++;
+				}
+			}
+			JOptionPane.showMessageDialog(null, "Sucesso!\n\nForam cotadas " + totalCurvas + " curvas de nível em " + curvasLayers.size() + " camadas.");
+		}catch(Exception e)
+		{
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+	}
+
+}

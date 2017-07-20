@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ESRI.Configuration xmlns="http://schemas.esri.com/Desktop/AddIns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Carrega Camadas</Name>
+  <AddInID>1d0ca9bc-015c-1000-5002-0a19a3e20000</AddInID>
+  <Description>Carrega as camadas com feicoes de um MDB</Description>
+  <Version>1.0</Version>
+  <Image>img/dsg.png</Image>
+  <Author>Cap Benincasa</Author>
+  <Company>1 CGEO</Company>
+  <Date>Thu May 18 16:33:08 BRT 2017</Date>
+  <Targets>
+    <Target name="Desktop" version="10.2"/>
+  </Targets>
+  <AddIn language="JAVA" library="CarregaCamadas.jar">
+    <ArcMap>
+      <Commands>
+        <Button caption="Carregar MDB" category="DSG - Restituicao" class="br.mil.eb.dsg.arctools.CarregaMDB" id="br.mil.eb.dsg.arctools.selectmdb" image="img/mdb.png" tip="Carregar MDB"/>
+        <Button caption="Ordem das camadas (CSV)" category="DSG - Restituicao" class="br.mil.eb.dsg.arctools.SelectCSV" id="br.mil.eb.dsg.arctools.selectcsv" image="img/csv.png" tip="Ordem das camadas (CSV)"/>
+        <Button caption="Carregar diretorio de estilos" category="DSG - Restituicao" class="br.mil.eb.dsg.arctools.LoadStyles" id="br.mil.eb.dsg.arctools.loadstyles" image="img/styles.jpg" tip="Carregar diretorio de estilos"/>
+      </Commands>
+      <Toolbars>
+        <Toolbar caption="Carrega camadas" id="br.mil.eb.dsg.arctools.carregacamadastoolbar" showInitially="true">
+          <Items>
+            <Button refID="br.mil.eb.dsg.arctools.selectcsv"/>
+            <Button refID="br.mil.eb.dsg.arctools.selectmdb" separator="false"/>
+            <Button refID="br.mil.eb.dsg.arctools.loadstyles"/>
+          </Items>
+        </Toolbar>
+      </Toolbars>
+      <Extensions>
+        <Extension autoLoad="true" class="br.mil.eb.dsg.arctools.LLExtension" id="br.mil.eb.dsg.arctools.llextension" productName="LLExtension"/>
+      </Extensions>
+    </ArcMap>
+  </AddIn>
+</ESRI.Configuration>

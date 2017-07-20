@@ -1,0 +1,217 @@
+/* Copyright 2012 ESRI
+* 
+* All rights reserved under the copyright laws of the United States
+* and applicable international laws, treaties, and conventions.
+* 
+* You may freely redistribute and use this sample code, with or
+* without modification, provided you include the original copyright
+* notice and use restrictions.
+* 
+* See the use restrictions.
+* 
+*/
+package br.mil.eb.dsg.arctools;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JOptionPane;
+
+import com.esri.arcgis.addins.desktop.Tool;
+import com.esri.arcgis.arcmapui.IMxDocument;
+import com.esri.arcgis.carto.IElement;
+import com.esri.arcgis.carto.IFillShapeElement;
+import com.esri.arcgis.carto.IGraphicsContainer;
+import com.esri.arcgis.carto.PolygonElement;
+import com.esri.arcgis.display.IColor;
+import com.esri.arcgis.display.IDisplayTransformation;
+import com.esri.arcgis.display.IFillSymbol;
+import com.esri.arcgis.display.IRgbColor;
+import com.esri.arcgis.display.IScreenDisplay;
+import com.esri.arcgis.display.ISimpleFillSymbol;
+import com.esri.arcgis.display.ISimpleLineSymbol;
+import com.esri.arcgis.display.ISymbol;
+import com.esri.arcgis.display.RgbColor;
+import com.esri.arcgis.display.SimpleFillSymbol;
+import com.esri.arcgis.display.SimpleLineSymbol;
+import com.esri.arcgis.display.esriScreenCache;
+import com.esri.arcgis.framework.IApplication;
+import com.esri.arcgis.geometry.GeometryEnvironment;
+import com.esri.arcgis.geometry.IGeometry;
+import com.esri.arcgis.geometry.IGeometryBridge2;
+import com.esri.arcgis.geometry.IPoint;
+import com.esri.arcgis.geometry.IPointCollection4;
+import com.esri.arcgis.geometry.Point;
+import com.esri.arcgis.geometry.Polygon;
+import com.esri.arcgis.system.tagRECT;
+import com.sun.javafx.tk.ScreenConfigurationAccessor;
+
+public class AcquisitionTool extends Tool {
+  IScreenDisplay screenDisplay;
+  IGeometry gabPolygon, newPolygon;
+  IApplication app;
+  IMxDocument mxDoc;
+  
+  // Called when the tool is activated by clicking it
+  @Override
+  public void activate() {
+	  try{
+		  mxDoc = (IMxDocument) app.getDocument();
+		  screenDisplay = mxDoc.getActiveView().getScreenDisplay();
+	  }
+	  catch(Exception e){
+		  e.printStackTrace();
+	  }
+  }
+  
+  // Returns whether this tool is checked
+  public boolean isChecked() {
+    return false;
+  }
+  
+  // Returns whether this tool is enabled
+  public boolean isEnabled() {
+    return true;
+  }
+  
+  @Override
+  public void mouseReleased(MouseEvent me){
+	  try {
+		  mxDoc.getActiveView().refresh();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  }
+  
+  // Called when the mouse is moved while the tool is active
+  @Override
+  public void mouseMoved(MouseEvent me) {
+  	  try
+  	  {
+  		  if(me.getButton() != 0)
+  		  {
+  			  mxDoc.getActiveView().refresh();
+  			  gabPolygon = new Polygon();
+  			  gabPolygon = getPolygon(me);
+	
+  			  screenDisplay.startDrawing(screenDisplay.getHDC(), (short) esriScreenCache.esriNoScreenCache);
+  			  screenDisplay.setSymbol(getSymbol());
+  			  screenDisplay.drawPolygon(gabPolygon);
+  			  screenDisplay.finishDrawing();*/
+  		  }
+  		  else{
+  			  mxDoc.getActivatedView().refresh();
+  		  }
+  	  }
+  	  catch(Exception e){
+//  		  JOptionPane.showMessageDialog(null, e.toString());
+  		  e.printStackTrace();
+  	  }
+  }
+  
+  // Called when a mouse tool is pressed while the tool is active
+  @Override
+  public void mousePressed(MouseEvent me) {
+	  try
+      {
+	//	if(me.isControlDown())
+		{
+			IGraphicsContainer con = (IGraphicsContainer) mxDoc.getFocusMap();
+			gabPolygon = getPolygon(me);
+
+			IFillShapeElement fillShapeElement = new PolygonElement();
+			
+			fillShapeElement.setSymbol((ISimpleFillSymbol) getSymbol());
+			IElement element = (IElement) fillShapeElement;
+			element.setGeometry(gabPolygon);
+	    
+			con.deleteAllElements();
+			con.addElement(element, 0);
+//		    screenDisplay.startDrawing(screenDisplay.getHDC(), (short) esriScreenCache.esriNoScreenCache);
+//	  	    screenDisplay.setSymbol(getSymbol());
+//	  	    screenDisplay.drawPolygon(gabPolygon);
+//		    screenDisplay.finishDrawing();
+		}
+		//else
+		{
+//			mxDoc.getActiveView().refresh();
+		}  	    
+      }
+      catch(Exception ex)
+      {
+        ex.printStackTrace();
+      }
+  }
+  
+//  @Override
+  /*public void keyReleased(KeyEvent ke){
+	  try{
+		  if(ke.getKeyCode() == KeyEvent.VK_CONTROL)
+		  {
+			//  mxDoc.getActiveView().refresh();
+		  }
+	  }
+	  catch(Exception e){
+		  e.printStackTrace();
+	  }
+  }*/
+  
+  // Initializes this tool with the ArcGIS application it is hosted in
+  @Override
+  public void init(IApplication app) {
+    this.app = app;
+  }
+
+  // Define drawing style.
+  public ISymbol getSymbol(){
+		try{
+			IRgbColor rgbColor = new RgbColor();
+			rgbColor.setRed(255);
+	
+			IRgbColor contourColor = new RgbColor();
+			contourColor.setRed(255);
+			
+			IColor color = rgbColor;
+			IColor color2 = contourColor;
+			color.setTransparency((byte) 0);
+			
+			ISimpleFillSymbol simpleFillSymbol = new SimpleFillSymbol();
+			simpleFillSymbol.setColor(color);
+			ISimpleLineSymbol contourSymbol = new SimpleLineSymbol();
+			contourSymbol.setColor(color2);
+			contourSymbol.setWidth(5);
+			simpleFillSymbol.setOutline(contourSymbol);
+			ISymbol symbol = (ISymbol)simpleFillSymbol;
+			return symbol;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+  }
+  // Create a square polygon.
+  public IGeometry getPolygon(MouseEvent me) throws Exception{
+    
+	  	IGeometry pointPolygon = new Polygon();
+	  	IGeometryBridge2 geometryBridge = new GeometryEnvironment();
+
+	  	IDisplayTransformation dTransf = screenDisplay.getDisplayTransformation();
+		IPoint[] points = new IPoint[5];
+		
+		points[0] = new Point();
+		points[0] = dTransf.toMapPoint(me.getX()-50, me.getY()-50);
+		points[1] = new Point();
+		points[1] = dTransf.toMapPoint(me.getX()-50, me.getY()+50);
+		points[2] = new Point();
+		points[2] = dTransf.toMapPoint(me.getX()+50, me.getY()+50);
+		points[3] = new Point();
+		points[3] = dTransf.toMapPoint(me.getX()+50, me.getY()-50);
+		points[4] = new Point();
+		points[4] = dTransf.toMapPoint(me.getX()-50, me.getY()-50);
+		
+		geometryBridge.addPoints((IPointCollection4)pointPolygon, points);
+		//The point polygon is now defined.
+		return pointPolygon;
+  }
+}

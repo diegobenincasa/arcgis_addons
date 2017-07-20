@@ -1,0 +1,16 @@
+package br.mil.eb.dsg.arctools;
+
+import java.io.IOException;
+
+import com.esri.arcgis.addins.desktop.Button;
+import com.esri.arcgis.interop.AutomationException;
+
+public class CotaPontos extends Button {
+
+	@Override
+	public void onClick() throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

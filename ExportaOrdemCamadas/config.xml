@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ESRI.Configuration xmlns="http://schemas.esri.com/Desktop/AddIns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Exporta Ordem de Camadas</Name>
+  <AddInID>308f8da1-015c-1000-5000-0a19a3ca0000</AddInID>
+  <Description>Exporta para CSV a ordem das camadas do MXD</Description>
+  <Version>1.0</Version>
+  <Image>img/dsg.png</Image>
+  <Author>Cap Benincasa</Author>
+  <Company>1 CGEO</Company>
+  <Date>Mon May 22 11:28:53 BRT 2017</Date>
+  <Targets>
+    <Target name="Desktop" version="10.2"/>
+  </Targets>
+  <AddIn language="JAVA" library="ExportaOrdemCamadas.jar">
+    <ArcMap>
+      <Commands>
+        <Button caption="Exportar ordem de camadas" category="DSG - Utilidades" class="br.mil.eb.dsg.arctools.ExportaCamadasButton" id="br.mil.eb.dsg.arctools.exportacamadasbutton" image="img/export.png" tip="Exportar ordem de camadas"/>
+      </Commands>
+      <Toolbars>
+        <Toolbar caption="Exportar camadas" id="br.mil.eb.dsg.arctools.exportacamadastoolbar" showInitially="true">
+          <Items>
+            <Button refID="br.mil.eb.dsg.arctools.exportacamadasbutton"/>
+          </Items>
+        </Toolbar>
+      </Toolbars>
+    </ArcMap>
+  </AddIn>
+</ESRI.Configuration>

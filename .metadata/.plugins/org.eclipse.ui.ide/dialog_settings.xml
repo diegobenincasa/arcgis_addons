@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1490107935270" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="com.esri.arcgis.javase.core.wizard.new.javasesdk" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="com.esri.arcgis.javase.core.arcgisjavase"/>
+			<item value="com.esri.arcgis/com.esri.arcgis.core.matrix"/>
+			<item value="com.esri.arcgis/com.esri.arcgis.core.matrix/com.esri.arcgis.addin"/>
+		</list>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="361" key="DIALOG_Y_ORIGIN"/>
+		<item value="658" key="DIALOG_X_ORIGIN"/>
+	</section>
+</section>

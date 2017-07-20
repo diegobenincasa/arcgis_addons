@@ -1,0 +1,10 @@
+#Tue Apr 25 09:17:41 BRT 2017
+Single-line=comment\=0,0,0,0,0,0,102,0
+Type=0,0,0,0,0,51,51,51
+Multi-line=comment\=0,0,0,0,0,0,102,0
+Single=quoted string\=0,0,0,0,0,166,0,0
+Keyword=0,0,0,0,0,127,0,85
+Others=0,0,0,0,0,0,0,0
+Identifier=0,0,0,0,0,0,0,153
+eclipse.preferences.version=1
+Double=quoted string\=0,0,0,0,0,166,0,0

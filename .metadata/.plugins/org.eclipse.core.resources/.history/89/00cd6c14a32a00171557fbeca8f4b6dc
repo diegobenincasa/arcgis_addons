@@ -1,0 +1,16 @@
+package br.mil.eb.arcobjects.plugin;
+
+import java.io.IOException;
+
+import com.esri.arcgis.addins.desktop.Tool;
+import com.esri.arcgis.interop.AutomationException;
+
+public class ToolTeste extends Tool {
+
+	@Override
+	public void activate() throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,27 @@
+package br.mil.eb.arcobjects.plugin;
+
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+
+import com.esri.arcgis.addins.desktop.Tool;
+import com.esri.arcgis.interop.AutomationException;
+
+public class ToolTeste extends Tool {
+
+	/**
+	 * Called when the tool is activated by clicking it.
+	 * 
+	 * @exception java.io.IOException if there are interop problems.
+	 * @exception com.esri.arcgis.interop.AutomationException if the component throws an ArcObjects exception.
+	 */
+	@Override
+	public void activate() throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+
+	}
+	@Override
+	public void mousePressed(MouseEvent me) {
+		// TODO Auto-generated method stub
+
+	}
+}

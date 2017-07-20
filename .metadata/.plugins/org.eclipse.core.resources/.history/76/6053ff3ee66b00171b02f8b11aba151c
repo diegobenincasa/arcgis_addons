@@ -1,0 +1,140 @@
+package br.mil.eb.dsg.arctools;
+
+import java.io.IOException;
+
+import com.esri.arcgis.controls.IEngineEditEventsOnCreateFeatureEvent;
+import com.esri.arcgis.editor.IEditEvents;
+import com.esri.arcgis.editor.IEditEventsAfterDrawSketchEvent;
+import com.esri.arcgis.editor.IEditEventsOnChangeFeatureEvent;
+import com.esri.arcgis.editor.IEditEventsOnConflictsDetectedEvent;
+import com.esri.arcgis.editor.IEditEventsOnCreateFeatureEvent;
+import com.esri.arcgis.editor.IEditEventsOnCurrentLayerChangedEvent;
+import com.esri.arcgis.editor.IEditEventsOnCurrentTaskChangedEvent;
+import com.esri.arcgis.editor.IEditEventsOnDeleteFeatureEvent;
+import com.esri.arcgis.editor.IEditEventsOnRedoEvent;
+import com.esri.arcgis.editor.IEditEventsOnSelectionChangedEvent;
+import com.esri.arcgis.editor.IEditEventsOnSketchFinishedEvent;
+import com.esri.arcgis.editor.IEditEventsOnSketchModifiedEvent;
+import com.esri.arcgis.editor.IEditEventsOnStartEditingEvent;
+import com.esri.arcgis.editor.IEditEventsOnStopEditingEvent;
+import com.esri.arcgis.editor.IEditEventsOnUndoEvent;
+import com.esri.arcgis.geodatabase.IFeature;
+import com.esri.arcgis.geometry.IPoint;
+import com.esri.arcgis.interop.AutomationException;
+
+public class MyEditEventsListener implements IEditEvents {
+
+	private static final long serialVersionUID = 1L;
+	
+	public void onCreateFeature(IEngineEditEventsOnCreateFeatureEvent arg0) throws IOException, AutomationException {
+		IPoint lastPoint = (IPoint) arg0;
+		
+		double cotaZ = lastPoint.getZ();
+		
+		IFeature pointFeature = (IFeature) arg0;
+		int atribCota = pointFeature.getFields().findField("cota");
+		pointFeature.setValue(atribCota, cotaZ);
+		pointFeature.store();
+	}
+
+	@Override
+	public void afterDrawSketch(IEditEventsAfterDrawSketchEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onChangeFeature(IEditEventsOnChangeFeatureEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onConflictsDetected(
+			IEditEventsOnConflictsDetectedEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCreateFeature(IEditEventsOnCreateFeatureEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCurrentLayerChanged(
+			IEditEventsOnCurrentLayerChangedEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onCurrentTaskChanged(
+			IEditEventsOnCurrentTaskChangedEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDeleteFeature(IEditEventsOnDeleteFeatureEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRedo(IEditEventsOnRedoEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSelectionChanged(IEditEventsOnSelectionChangedEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSketchFinished(IEditEventsOnSketchFinishedEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onSketchModified(IEditEventsOnSketchModifiedEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStartEditing(IEditEventsOnStartEditingEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStopEditing(IEditEventsOnStopEditingEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUndo(IEditEventsOnUndoEvent theEvent)
+			throws IOException, AutomationException {
+		// TODO Auto-generated method stub
+		
+	}
+}
