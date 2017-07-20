@@ -83,7 +83,7 @@ If you have questions or suggestions, feel free to contact me.
 > - Rua Cleveland, 250 - Santa Teresa
 > - CEP 90.850-240
 > - Porto Alegre, Rio Grande do Sul, Brazil
-> - Phone: +55 (51) 3907-0648 (ext. 2137)</small
+> - Phone: +55 (51) 3907-0648 (ext. 2137)
 > - Mobile: +55(51) 99902-3892
 > - E-mail: [benincasa.diego@eb.mil.br][1]
 
