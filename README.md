@@ -1,7 +1,7 @@
 **1º CGEO Eclipse workspace with ArcGIS Desktop 10.2+ Add-ins**
 ===================
 
-This repository contains a fully configured Eclipse workspace with add-ins projects for ArcGIS Desktop 10.2+. Those projects are developed in Java and directed to feature acquisition using **Leica Photogrammetry Suite (LPS)** machines equipped with **ERDAS StereoAnalyst** extension.
+This repository contains a fully configured Eclipse workspace with add-ins projects for ArcGIS Desktop 10.2+. Those projects are developed in Java and focused on feature acquisition using **Leica Photogrammetry Suite (LPS)** machines equipped with **ERDAS StereoAnalyst** extension.
 
 -------------
 
